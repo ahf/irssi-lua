@@ -43,8 +43,19 @@ static void lua_cmd_unload(const char *data)
     cmd_params_free(free_arg);
 }
 
+static void print_lua_script(gpointer key, gpointer interpreter, gpointer user_data)
+{
+    printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "%s", key);
+}
+
 static void lua_cmd_list(const char *data)
 {
+    /*
+     * FIXME: This is currently just a debug function The output needs lots of
+     * cleaning.
+     */
+
+    g_hash_table_foreach(get_currently_loaded_scripts(), print_lua_script, NULL);
 }
 
 void lua_commands_init()

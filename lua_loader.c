@@ -1,12 +1,14 @@
 #include <lua_loader.h>
 #include <lua_irssi.h>
-
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
-#include <glib.h>
+#include <lua_api.h>
 
 static GHashTable *lua_scripts = NULL;
+static lua_State *current_interpreter;
+
+lua_State *get_current_interpreter()
+{
+    return current_interpreter;
+}
 
 GHashTable *get_currently_loaded_scripts()
 {
@@ -50,6 +52,7 @@ void lua_load_script(const char *script_name)
     }
 
     luaL_openlibs(interpreter);
+    register_lua_api(interpreter);
 
     if (luaL_loadfile(interpreter, script_name) != 0)
     {
@@ -58,16 +61,8 @@ void lua_load_script(const char *script_name)
         return;
     }
 
-#if 0
-    if (luaL_dostring(interpreter, "FIXME") != 0)
-    {
-        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to redirect stdout/stderr: %s", lua_tostring(interpreter, -1));
-        lua_close(interpreter);
-        return;
-    }
-#endif
-
     g_hash_table_insert(lua_scripts, g_strdup(script_name), interpreter);
+    current_interpreter = interpreter;
 
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "Script \"%s\" loaded.", script_name);
 }

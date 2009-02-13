@@ -8,6 +8,11 @@
 
 static GHashTable *lua_scripts = NULL;
 
+GHashTable *get_currently_loaded_scripts()
+{
+    return lua_scripts;
+}
+
 static void free_lua_script_hash_table_entry(gpointer key, gpointer interpreter, gpointer user_data)
 {
     g_free(key);

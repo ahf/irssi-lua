@@ -26,9 +26,15 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
-gboolean script_loaded(const char *script_name);
+typedef struct
+{
+    char *script_name;
+    lua_State *interpreter;
+} lua_script_t;
 
-GHashTable *get_currently_loaded_scripts();
+lua_script_t *get_script(const char *script_name);
+
+GList *get_currently_loaded_scripts();
 
 void lua_load_script(const char *script_name);
 void lua_unload_script(const char *script_name);

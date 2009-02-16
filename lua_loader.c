@@ -22,30 +22,42 @@
 #include <lua_irssi.h>
 #include <lua_api.h>
 
-static GHashTable *lua_scripts = NULL;
+static GList *lua_scripts = NULL;
 
-GHashTable *get_currently_loaded_scripts()
+static void free_lua_script(lua_script_t *t)
+{
+    if (t->interpreter)
+        lua_close(t->interpreter);
+
+    g_free(t->script_name);
+    g_free(t);
+}
+
+GList *get_currently_loaded_scripts()
 {
     return lua_scripts;
 }
 
-static void free_lua_script_hash_table_entry(gpointer key, gpointer interpreter, gpointer user_data)
+lua_script_t *get_script(const char *script_name)
 {
-    g_free(key);
-    lua_close(interpreter);
-}
+    GList *tmp;
 
-gboolean script_loaded(const char *script_name)
-{
-    return g_hash_table_lookup(lua_scripts, script_name) != NULL;
+    for (tmp = lua_scripts; NULL != tmp; tmp = tmp->next)
+    {
+        lua_script_t *t = tmp->data;
+        if (0 == strcmp(script_name, (char *)t->script_name))
+            return t;
+    }
+
+    return NULL;
 }
 
 void lua_load_script(const char *script_name)
 {
     struct stat stat_buf;
-    lua_State *interpreter;
+    lua_script_t *script;
 
-    if (script_loaded(script_name))
+    if (NULL != get_script(script_name))
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Script \"%s\" already loaded.", script_name);
         return;
@@ -57,53 +69,54 @@ void lua_load_script(const char *script_name)
         return;
     }
 
-    interpreter = luaL_newstate();
+    script = malloc(sizeof(lua_script_t));
+    g_assert(script);
 
-    if (interpreter == NULL)
+    script->interpreter = luaL_newstate();
+    script->script_name = g_strdup(script_name);
+
+    if (script->interpreter == NULL)
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to create lua interpreter");
+        free_lua_script(script);
         return;
     }
 
-    luaL_openlibs(interpreter);
-    register_lua_api(interpreter);
+    luaL_openlibs(script->interpreter);
+    register_lua_api(script->interpreter);
 
-    if (luaL_loadfile(interpreter, script_name) != 0)
+    if (luaL_loadfile(script->interpreter, script_name) != 0)
     {
-        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to load script: %s", lua_tostring(interpreter, -1));
-        lua_close(interpreter);
+        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to load script: %s", lua_tostring(script->interpreter, -1));
+        free_lua_script(script);
         return;
     }
 
-    if (lua_pcall(interpreter, 0, 0, 0) != 0)
+    if (lua_pcall(script->interpreter, 0, 0, 0) != 0)
     {
-        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to execute the script: %s", lua_tostring(interpreter, -1));
-        lua_close(interpreter);
+        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to execute the script: %s", lua_tostring(script->interpreter, -1));
+        free_lua_script(script);
         return;
     }
 
-    g_hash_table_insert(lua_scripts, g_strdup(script_name), interpreter);
+    lua_scripts = g_list_append(lua_scripts, script);
 
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "Script \"%s\" loaded.", script_name);
 }
 
 void lua_unload_script(const char *script_name)
 {
-    void *interpreter;
-    void *key;
+    lua_script_t *script;
 
-    if (! script_loaded(script_name))
+    if (NULL == (script = get_script(script_name)))
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Script \"%s\" not loaded.", script_name);
         return;
     }
-
-    if (g_hash_table_lookup_extended(lua_scripts, script_name, &key, &interpreter))
+    else
     {
-        g_hash_table_remove(lua_scripts, script_name);
-
-        g_free(key);
-        lua_close(interpreter);
+        lua_scripts = g_list_remove(lua_scripts, script);
+        free_lua_script(script);
     }
 
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "Script \"%s\" unloaded.", script_name);
@@ -111,11 +124,12 @@ void lua_unload_script(const char *script_name)
 
 void lua_loader_init()
 {
-    lua_scripts = g_hash_table_new(g_str_hash, g_str_equal);
 }
 
 void lua_loader_deinit()
 {
-    g_hash_table_foreach(lua_scripts, free_lua_script_hash_table_entry, NULL);
-    g_hash_table_destroy(lua_scripts);
+    GList *tmp;
+
+    for (tmp = lua_scripts; NULL != tmp; tmp = tmp->next)
+        free_lua_script((lua_script_t *)tmp);
 }

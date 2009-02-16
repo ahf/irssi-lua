@@ -21,6 +21,27 @@
 #include <lua_api_settings.h>
 #include <lua_irssi.h>
 
+#include <glib.h>
+
+static GHashTable *lua_settings = NULL;
+
+static void lua_settings_free(gpointer key, gpointer list, gpointer user_data)
+{
+    g_list_foreach(list, (GFunc)g_free, NULL);
+    g_list_free(list);
+}
+
+void lua_api_settings_init()
+{
+    lua_settings = g_hash_table_new(g_str_hash, g_direct_equal);
+}
+
+void lua_api_settings_deinit()
+{
+    g_hash_table_foreach(lua_settings, lua_settings_free, NULL);
+    g_hash_table_destroy(lua_settings);
+}
+
 int lua_api_settings_get_str(lua_State *interpreter)
 {
     const char *key;

@@ -23,6 +23,9 @@
 
 #include <lua_api.h>
 
+void lua_api_settings_init();
+void lua_api_settings_deinit();
+
 int lua_api_settings_get_str(lua_State *interpreter);
 int lua_api_settings_get_int(lua_State *interpreter);
 int lua_api_settings_get_bool(lua_State *interpreter);

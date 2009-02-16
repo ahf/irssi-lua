@@ -53,3 +53,13 @@ void register_lua_api(lua_State *interpreter)
 {
     luaL_openlib(interpreter, "irssi", irssi_lua_functions, 0);
 }
+
+void lua_api_init()
+{
+    lua_api_settings_init();
+}
+
+void lua_api_deinit()
+{
+    lua_api_settings_deinit();
+}

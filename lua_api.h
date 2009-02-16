@@ -36,4 +36,7 @@
 void register_lua_api(lua_State *interpreter);
 void wrong_number_of_arguments(const char *function_name);
 
+void lua_api_init();
+void lua_api_deinit();
+
 #endif

@@ -7,6 +7,9 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
+#define LUA_OK 1
+#define LUA_ERROR 0
+
 void register_lua_api(lua_State *interpreter);
 
 #endif

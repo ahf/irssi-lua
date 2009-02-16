@@ -2,9 +2,6 @@
 #include <lua_irssi.h>
 #include <lua_loader.h>
 
-#define LUA_OK 1
-#define LUA_ERROR 0
-
 static int lua_api_settings_get_str(lua_State *interpreter)
 {
     const char *key;

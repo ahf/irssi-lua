@@ -5,11 +5,8 @@
 #define LUA_OK 1
 #define LUA_ERROR 0
 
-static int lua_api_print(lua_State *i)
+static int lua_api_print(lua_State *interpreter)
 {
-    printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "CALLED");
-
-    lua_State *interpreter = get_current_interpreter();
     const char *message;
     int n;
 
@@ -26,11 +23,11 @@ static int lua_api_print(lua_State *i)
 }
 
 static const luaL_Reg irssi_lua_functions[] = {
-    { "print", &lua_api_print },
+    { "print", lua_api_print },
     { NULL, NULL }
 };
 
 void register_lua_api(lua_State *interpreter)
 {
-    luaL_register(interpreter, "irssi", irssi_lua_functions);
+    luaL_openlib(interpreter, "irssi", irssi_lua_functions, 0);
 }

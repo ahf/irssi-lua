@@ -3,7 +3,7 @@
 #include <lua_api.h>
 
 static GHashTable *lua_scripts = NULL;
-static lua_State *current_interpreter;
+static lua_State *current_interpreter = NULL;
 
 lua_State *get_current_interpreter()
 {
@@ -57,6 +57,13 @@ void lua_load_script(const char *script_name)
     if (luaL_loadfile(interpreter, script_name) != 0)
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to load script: %s", lua_tostring(interpreter, -1));
+        lua_close(interpreter);
+        return;
+    }
+
+    if (lua_pcall(interpreter, 0, 0, 0) != 0)
+    {
+        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to execute the script.");
         lua_close(interpreter);
         return;
     }

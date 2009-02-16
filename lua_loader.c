@@ -3,12 +3,6 @@
 #include <lua_api.h>
 
 static GHashTable *lua_scripts = NULL;
-static lua_State *current_interpreter = NULL;
-
-lua_State *get_current_interpreter()
-{
-    return current_interpreter;
-}
 
 GHashTable *get_currently_loaded_scripts()
 {
@@ -69,7 +63,6 @@ void lua_load_script(const char *script_name)
     }
 
     g_hash_table_insert(lua_scripts, g_strdup(script_name), interpreter);
-    current_interpreter = interpreter;
 
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "Script \"%s\" loaded.", script_name);
 }

@@ -11,7 +11,6 @@
 gboolean script_loaded(const char *script_name);
 
 GHashTable *get_currently_loaded_scripts();
-lua_State *get_current_interpreter();
 
 void lua_load_script(const char *script_name);
 void lua_unload_script(const char *script_name);

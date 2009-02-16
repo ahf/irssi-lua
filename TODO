@@ -1,0 +1,5 @@
+TODO
+====
+
+ * Figure out how to document Lua code via inline comments in the C source
+   files.

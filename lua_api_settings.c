@@ -27,6 +27,7 @@ static GHashTable *lua_settings = NULL;
 
 static void lua_settings_free(gpointer key, gpointer list, gpointer user_data)
 {
+    g_free(key);
     g_list_foreach(list, (GFunc)g_free, NULL);
     g_list_free(list);
 }

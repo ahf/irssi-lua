@@ -1,4 +1,4 @@
-CFLAGS = -Wall -O2 -g
+CFLAGS = -Wall -O2 -Werror -g
 LDFLAGS = -avoid-version -module
 
 OBJECTS = lua_loader.o lua_core.o lua_commands.o lua_api.o lua_api_settings.o lua_api_output.o

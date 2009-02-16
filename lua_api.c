@@ -3,6 +3,11 @@
 #include <lua_irssi.h>
 #include <lua_loader.h>
 
+void wrong_number_of_arguments(const char *function_name)
+{
+    printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Wrong number of arguments for function \"%s\"", function_name);
+}
+
 static int lua_api_print(lua_State *interpreter)
 {
     const char *message;

@@ -11,5 +11,6 @@
 #define LUA_ERROR 0
 
 void register_lua_api(lua_State *interpreter);
+void wrong_number_of_arguments(const char *function_name);
 
 #endif

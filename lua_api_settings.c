@@ -4,12 +4,12 @@
 int lua_api_settings_get_str(lua_State *interpreter)
 {
     const char *key;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 1)
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_get_str");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -1);
 
@@ -21,12 +21,12 @@ int lua_api_settings_get_str(lua_State *interpreter)
 int lua_api_settings_get_int(lua_State *interpreter)
 {
     const char *key;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 1)
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_get_int");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -1);
 
@@ -38,12 +38,12 @@ int lua_api_settings_get_int(lua_State *interpreter)
 int lua_api_settings_get_bool(lua_State *interpreter)
 {
     const char *key;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 1)
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_get_bool");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -1);
 
@@ -55,12 +55,12 @@ int lua_api_settings_get_bool(lua_State *interpreter)
 int lua_api_settings_get_time(lua_State *interpreter)
 {
     const char *key;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 1)
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_get_time");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -1);
 
@@ -72,12 +72,12 @@ int lua_api_settings_get_time(lua_State *interpreter)
 int lua_api_settings_get_level(lua_State *interpreter)
 {
     const char *key;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 1)
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_get_level");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -1);
 
@@ -89,12 +89,12 @@ int lua_api_settings_get_level(lua_State *interpreter)
 int lua_api_settings_get_size(lua_State *interpreter)
 {
     const char *key;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 1)
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_get_size");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -1);
 
@@ -107,12 +107,12 @@ int lua_api_settings_set_str(lua_State *interpreter)
 {
     const char *key;
     const char *value;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 2)
+    if (2 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_set_str");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tostring(interpreter, -1);
@@ -126,12 +126,12 @@ int lua_api_settings_set_int(lua_State *interpreter)
 {
     const char *key;
     int value;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 2)
+    if (2 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_set_int");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tonumber(interpreter, -1);
@@ -145,12 +145,12 @@ int lua_api_settings_set_bool(lua_State *interpreter)
 {
     const char *key;
     int value;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 2)
+    if (2 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_set_bool");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tonumber(interpreter, -1);
@@ -164,12 +164,12 @@ int lua_api_settings_set_time(lua_State *interpreter)
 {
     const char *key;
     const char *value;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 2)
+    if (2 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_set_time");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tostring(interpreter, -1);
@@ -184,12 +184,12 @@ int lua_api_settings_set_level(lua_State *interpreter)
 {
     const char *key;
     const char *value;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 2)
+    if (2 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_set_level");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tostring(interpreter, -1);
@@ -204,12 +204,12 @@ int lua_api_settings_set_size(lua_State *interpreter)
 {
     const char *key;
     const char *value;
-    int n;
 
-    n = lua_gettop(interpreter);
-
-    if (n != 2)
+    if (2 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_set_size");
         return LUA_ERROR;
+    }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tostring(interpreter, -1);

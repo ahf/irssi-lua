@@ -26,6 +26,8 @@
     lua_pushnumber(state, value); \
     lua_settable(state, -3);
 
+#include <lua_loader.h>
+
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>

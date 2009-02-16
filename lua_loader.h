@@ -33,6 +33,7 @@ typedef struct
 } lua_script_t;
 
 lua_script_t *get_script(const char *script_name);
+lua_script_t *get_current_script();
 
 GList *get_currently_loaded_scripts();
 

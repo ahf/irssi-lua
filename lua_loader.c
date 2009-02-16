@@ -23,6 +23,7 @@
 #include <lua_api.h>
 
 static GList *lua_scripts = NULL;
+static lua_script_t *current_lua_script = NULL;
 
 static void free_lua_script(lua_script_t *t)
 {
@@ -31,6 +32,11 @@ static void free_lua_script(lua_script_t *t)
 
     g_free(t->script_name);
     g_free(t);
+}
+
+lua_script_t *get_current_script()
+{
+    return current_lua_script;
 }
 
 GList *get_currently_loaded_scripts()
@@ -84,6 +90,7 @@ void lua_load_script(const char *script_name)
 
     luaL_openlibs(script->interpreter);
     register_lua_api(script->interpreter);
+    current_lua_script = script;
 
     if (luaL_loadfile(script->interpreter, script_name) != 0)
     {
@@ -115,8 +122,9 @@ void lua_unload_script(const char *script_name)
     }
     else
     {
-        lua_scripts = g_list_remove(lua_scripts, script);
+        signal_emit("lua script destroyed", 1, script);
         free_lua_script(script);
+        lua_scripts = g_list_remove(lua_scripts, script);
     }
 
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "Script \"%s\" unloaded.", script_name);
@@ -128,8 +136,5 @@ void lua_loader_init()
 
 void lua_loader_deinit()
 {
-    GList *tmp;
-
-    for (tmp = lua_scripts; NULL != tmp; tmp = tmp->next)
-        free_lua_script((lua_script_t *)tmp);
+    g_list_foreach(lua_scripts, (GFunc)free_lua_script, NULL);
 }

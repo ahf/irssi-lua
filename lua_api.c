@@ -46,6 +46,14 @@ static const luaL_Reg irssi_lua_functions[] = {
     { "settings_set_time", lua_api_settings_set_time },
     { "settings_set_level", lua_api_settings_set_level },
     { "settings_set_size", lua_api_settings_set_size },
+
+    { "settings_add_str", lua_api_settings_add_str },
+    { "settings_add_int", lua_api_settings_add_int },
+    { "settings_add_bool", lua_api_settings_add_bool },
+    { "settings_add_time", lua_api_settings_add_time },
+    { "settings_add_level", lua_api_settings_add_level },
+    { "settings_add_size", lua_api_settings_add_size },
+
     { NULL, NULL }
 };
 

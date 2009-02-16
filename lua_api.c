@@ -5,6 +5,108 @@
 #define LUA_OK 1
 #define LUA_ERROR 0
 
+static int lua_api_settings_get_str(lua_State *interpreter)
+{
+    const char *key;
+    int n;
+
+    n = lua_gettop(interpreter);
+
+    if (n != 1)
+        return LUA_ERROR;
+
+    key = lua_tostring(interpreter, -1);
+
+    lua_pushstring(interpreter, settings_get_str(key));
+
+    return LUA_OK;
+}
+
+static int lua_api_settings_get_int(lua_State *interpreter)
+{
+    const char *key;
+    int n;
+
+    n = lua_gettop(interpreter);
+
+    if (n != 1)
+        return LUA_ERROR;
+
+    key = lua_tostring(interpreter, -1);
+
+    lua_pushnumber(interpreter, settings_get_int(key));
+
+    return LUA_OK;
+}
+
+static int lua_api_settings_get_bool(lua_State *interpreter)
+{
+    const char *key;
+    int n;
+
+    n = lua_gettop(interpreter);
+
+    if (n != 1)
+        return LUA_ERROR;
+
+    key = lua_tostring(interpreter, -1);
+
+    lua_pushboolean(interpreter, settings_get_bool(key));
+
+    return LUA_OK;
+}
+
+static int lua_api_settings_get_time(lua_State *interpreter)
+{
+    const char *key;
+    int n;
+
+    n = lua_gettop(interpreter);
+
+    if (n != 1)
+        return LUA_ERROR;
+
+    key = lua_tostring(interpreter, -1);
+
+    lua_pushnumber(interpreter, settings_get_time(key));
+
+    return LUA_OK;
+}
+
+static int lua_api_settings_get_level(lua_State *interpreter)
+{
+    const char *key;
+    int n;
+
+    n = lua_gettop(interpreter);
+
+    if (n != 1)
+        return LUA_ERROR;
+
+    key = lua_tostring(interpreter, -1);
+
+    lua_pushnumber(interpreter, settings_get_level(key));
+
+    return LUA_OK;
+}
+
+static int lua_api_settings_get_size(lua_State *interpreter)
+{
+    const char *key;
+    int n;
+
+    n = lua_gettop(interpreter);
+
+    if (n != 1)
+        return LUA_ERROR;
+
+    key = lua_tostring(interpreter, -1);
+
+    lua_pushnumber(interpreter, settings_get_size(key));
+
+    return LUA_OK;
+}
+
 static int lua_api_print(lua_State *interpreter)
 {
     const char *message;
@@ -24,6 +126,12 @@ static int lua_api_print(lua_State *interpreter)
 
 static const luaL_Reg irssi_lua_functions[] = {
     { "print", lua_api_print },
+    { "settings_get_str", lua_api_settings_get_str },
+    { "settings_get_int", lua_api_settings_get_int },
+    { "settings_get_bool", lua_api_settings_get_bool },
+    { "settings_get_time", lua_api_settings_get_time },
+    { "settings_get_level", lua_api_settings_get_level },
+    { "settings_get_size", lua_api_settings_get_size },
     { NULL, NULL }
 };
 

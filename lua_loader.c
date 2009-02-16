@@ -57,7 +57,7 @@ void lua_load_script(const char *script_name)
 
     if (lua_pcall(interpreter, 0, 0, 0) != 0)
     {
-        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to execute the script.");
+        printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to execute the script: %s", lua_tostring(interpreter, -1));
         lua_close(interpreter);
         return;
     }

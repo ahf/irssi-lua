@@ -12,4 +12,11 @@ int lua_api_settings_get_time(lua_State *interpreter);
 int lua_api_settings_get_level(lua_State *interpreter);
 int lua_api_settings_get_size(lua_State *interpreter);
 
+int lua_api_settings_set_str(lua_State *interpreter);
+int lua_api_settings_set_int(lua_State *interpreter);
+int lua_api_settings_set_bool(lua_State *interpreter);
+int lua_api_settings_set_time(lua_State *interpreter);
+int lua_api_settings_set_level(lua_State *interpreter);
+int lua_api_settings_set_size(lua_State *interpreter);
+
 #endif

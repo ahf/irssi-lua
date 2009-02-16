@@ -22,12 +22,20 @@ static int lua_api_print(lua_State *interpreter)
 
 static const luaL_Reg irssi_lua_functions[] = {
     { "print", lua_api_print },
+
     { "settings_get_str", lua_api_settings_get_str },
     { "settings_get_int", lua_api_settings_get_int },
     { "settings_get_bool", lua_api_settings_get_bool },
     { "settings_get_time", lua_api_settings_get_time },
     { "settings_get_level", lua_api_settings_get_level },
     { "settings_get_size", lua_api_settings_get_size },
+
+    { "settings_set_str", lua_api_settings_set_str },
+    { "settings_set_int", lua_api_settings_set_int },
+    { "settings_set_bool", lua_api_settings_set_bool },
+    { "settings_set_time", lua_api_settings_set_time },
+    { "settings_set_level", lua_api_settings_set_level },
+    { "settings_set_size", lua_api_settings_set_size },
     { NULL, NULL }
 };
 

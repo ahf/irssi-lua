@@ -1,28 +1,13 @@
 #include <lua_api.h>
-#include <lua_api_settings.h>
 #include <lua_irssi.h>
 #include <lua_loader.h>
+
+#include <lua_api_settings.h>
+#include <lua_api_output.h>
 
 void wrong_number_of_arguments(const char *function_name)
 {
     printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Wrong number of arguments for function \"%s\"", function_name);
-}
-
-static int lua_api_print(lua_State *interpreter)
-{
-    const char *message;
-    int n;
-
-    n = lua_gettop(interpreter);
-
-    if (n != 1)
-        return LUA_ERROR;
-
-    message = lua_tostring(interpreter, -1);
-
-    printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "%s", message);
-
-    return LUA_OK;
 }
 
 static const luaL_Reg irssi_lua_functions[] = {

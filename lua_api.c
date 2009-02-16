@@ -59,7 +59,7 @@ static const luaL_Reg irssi_lua_functions[] = {
 
 void register_lua_api(lua_State *interpreter)
 {
-    luaL_openlib(interpreter, "irssi", irssi_lua_functions, 0);
+    luaL_openlib(interpreter, "Irssi", irssi_lua_functions, 0);
 }
 
 void lua_api_init()

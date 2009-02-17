@@ -24,6 +24,7 @@
 
 #include <lua_api_settings.h>
 #include <lua_api_output.h>
+#include <lua_api_commands.h>
 
 void wrong_number_of_arguments(const char *function_name)
 {
@@ -67,9 +68,11 @@ void register_lua_api(lua_State *interpreter)
 void lua_api_init()
 {
     lua_api_settings_init();
+    lua_api_commands_init();
 }
 
 void lua_api_deinit()
 {
     lua_api_settings_deinit();
+    lua_api_commands_deinit();
 }

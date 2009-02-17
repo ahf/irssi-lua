@@ -57,7 +57,7 @@ static void lua_remove_setting(const char *key)
 
     if (NULL != pos)
     {
-        list = g_list_remove_all(list, pos->data);
+        list = g_list_remove(list, pos->data);
         g_hash_table_insert(lua_settings, script, list);
     }
 }

@@ -65,7 +65,7 @@ void lua_load_script(const char *script_name)
 
     interpreter = luaL_newstate();
 
-    if (interpreter == NULL)
+    if (NULL == interpreter)
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to create lua interpreter");
         return;
@@ -75,7 +75,7 @@ void lua_load_script(const char *script_name)
     register_lua_api(interpreter);
     current_lua_script = g_strdup(script_name);
 
-    if (luaL_loadfile(interpreter, script_name) != 0)
+    if (0 != luaL_loadfile(interpreter, script_name))
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to load script: %s", lua_tostring(interpreter, -1));
         lua_close(interpreter);
@@ -83,7 +83,7 @@ void lua_load_script(const char *script_name)
         return;
     }
 
-    if (lua_pcall(interpreter, 0, 0, 0) != 0)
+    if (0 != lua_pcall(interpreter, 0, 0, 0))
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to execute the script: %s", lua_tostring(interpreter, -1));
         lua_close(interpreter);

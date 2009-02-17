@@ -54,6 +54,8 @@ static const luaL_Reg irssi_lua_functions[] = {
     { "settings_add_level", lua_api_settings_add_level },
     { "settings_add_size", lua_api_settings_add_size },
 
+    { "settings_remove", lua_api_settings_remove },
+
     { NULL, NULL }
 };
 

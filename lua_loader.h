@@ -26,16 +26,10 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
-typedef struct
-{
-    char *script_name;
-    lua_State *interpreter;
-} lua_script_t;
+lua_State *get_script(const char *script_name);
+char *get_current_script();
 
-lua_script_t *get_script(const char *script_name);
-lua_script_t *get_current_script();
-
-GList *get_currently_loaded_scripts();
+GHashTable *get_currently_loaded_scripts();
 
 void lua_load_script(const char *script_name);
 void lua_unload_script(const char *script_name);

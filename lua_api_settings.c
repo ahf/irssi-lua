@@ -35,24 +35,21 @@ static void lua_settings_free(gpointer key, gpointer list, gpointer user_data)
 static void lua_add_setting(const char *key)
 {
     GList *list;
-    lua_script_t *script = get_current_script();
+    char *script = get_current_script();
 
-    //g_return_if_fail(NULL != script);
-    g_assert(NULL != script);
+    g_return_if_fail(NULL != script);
 
     list = g_hash_table_lookup(lua_settings, script);
     list = g_list_append(list, g_strdup(key));
     g_hash_table_insert(lua_settings, script, list);
 }
 
-#if 0
 static void lua_remove_setting(const char *key)
 {
     GList *list, *pos;
-    lua_script_t *script = get_current_script();
+    char *script = get_current_script();
 
-    //g_return_if_fail(NULL != script);
-    g_assert(NULL != script);
+    g_return_if_fail(NULL != script);
 
     list = g_hash_table_lookup(lua_settings, script);
 
@@ -60,13 +57,12 @@ static void lua_remove_setting(const char *key)
 
     if (NULL != pos)
     {
-        list = g_list_remove(list, pos->data);
+        list = g_list_remove_all(list, pos->data);
         g_hash_table_insert(lua_settings, script, list);
     }
 }
-#endif
 
-static void sig_lua_script_destroyed(lua_script_t *script)
+static void sig_lua_script_destroyed(char *script)
 {
     GList *list;
 
@@ -74,7 +70,11 @@ static void sig_lua_script_destroyed(lua_script_t *script)
 
     if (NULL != list)
     {
-        g_list_foreach(list, (GFunc)settings_remove, NULL);
+        GList *tmp;
+
+        for (tmp = list; NULL != tmp; tmp = tmp->next)
+            settings_remove(tmp->data);
+
         lua_settings_free(script, list, NULL);
         g_hash_table_remove(lua_settings, script);
     }
@@ -82,7 +82,7 @@ static void sig_lua_script_destroyed(lua_script_t *script)
 
 void lua_api_settings_init()
 {
-    lua_settings = g_hash_table_new(g_direct_hash, g_direct_equal);
+    lua_settings = g_hash_table_new(g_str_hash, g_str_equal);
 
     signal_add("lua script destroyed", (SIGNAL_FUNC)sig_lua_script_destroyed);
 }
@@ -331,7 +331,7 @@ int lua_api_settings_add_str(lua_State *interpreter)
     default_value = lua_tostring(interpreter, -1);
 
     lua_add_setting(key);
-    settings_add_str_module(MODULE_NAME"/lua", section, key, default_value);
+    settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_OK;
 }
@@ -353,7 +353,7 @@ int lua_api_settings_add_int(lua_State *interpreter)
     default_value = lua_tonumber(interpreter, -1);
 
     lua_add_setting(key);
-    settings_add_int_module(MODULE_NAME"/lua", section, key, default_value);
+    settings_add_int_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_OK;
 }
@@ -375,7 +375,7 @@ int lua_api_settings_add_bool(lua_State *interpreter)
     default_value = lua_tonumber(interpreter, -1);
 
     lua_add_setting(key);
-    settings_add_bool_module(MODULE_NAME"/lua", section, key, default_value);
+    settings_add_bool_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_OK;
 }
@@ -397,7 +397,7 @@ int lua_api_settings_add_time(lua_State *interpreter)
     default_value = lua_tostring(interpreter, -1);
 
     lua_add_setting(key);
-    settings_add_str_module(MODULE_NAME"/lua", section, key, default_value);
+    settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_OK;
 }
@@ -419,7 +419,7 @@ int lua_api_settings_add_level(lua_State *interpreter)
     default_value = lua_tostring(interpreter, -1);
 
     lua_add_setting(key);
-    settings_add_str_module(MODULE_NAME"/lua", section, key, default_value);
+    settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_OK;
 }
@@ -441,7 +441,25 @@ int lua_api_settings_add_size(lua_State *interpreter)
     default_value = lua_tostring(interpreter, -1);
 
     lua_add_setting(key);
-    settings_add_str_module(MODULE_NAME"/lua", section, key, default_value);
+    settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
+
+    return LUA_OK;
+}
+
+int lua_api_settings_remove(lua_State *interpreter)
+{
+    const char *key;
+
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("settings_remove");
+        return LUA_ERROR;
+    }
+
+    key = lua_tostring(interpreter, -1);
+
+    lua_remove_setting(key);
+    settings_remove(key);
 
     return LUA_OK;
 }

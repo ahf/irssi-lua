@@ -47,4 +47,6 @@ int lua_api_settings_add_time(lua_State *interpreter);
 int lua_api_settings_add_level(lua_State *interpreter);
 int lua_api_settings_add_size(lua_State *interpreter);
 
+int lua_api_settings_remove(lua_State *interpreter);
+
 #endif

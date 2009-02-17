@@ -28,12 +28,12 @@ int lua_api_print(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("print");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     message = lua_tostring(interpreter, -1);
 
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "%s", message);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }

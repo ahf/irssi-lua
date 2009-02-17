@@ -32,8 +32,8 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
-#define LUA_OK 1
-#define LUA_ERROR 0
+#define LUA_SUCCESS 1
+#define LUA_FAILURE 0
 
 void register_lua_api(lua_State *interpreter);
 void wrong_number_of_arguments(const char *function_name);

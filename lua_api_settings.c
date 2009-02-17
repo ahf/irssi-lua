@@ -102,14 +102,14 @@ int lua_api_settings_get_str(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_get_str");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -1);
 
     lua_pushstring(interpreter, settings_get_str(key));
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_get_int(lua_State *interpreter)
@@ -119,14 +119,14 @@ int lua_api_settings_get_int(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_get_int");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -1);
 
     lua_pushnumber(interpreter, settings_get_int(key));
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_get_bool(lua_State *interpreter)
@@ -136,14 +136,14 @@ int lua_api_settings_get_bool(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_get_bool");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -1);
 
     lua_pushboolean(interpreter, settings_get_bool(key));
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_get_time(lua_State *interpreter)
@@ -153,14 +153,14 @@ int lua_api_settings_get_time(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_get_time");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -1);
 
     lua_pushnumber(interpreter, settings_get_time(key));
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_get_level(lua_State *interpreter)
@@ -170,14 +170,14 @@ int lua_api_settings_get_level(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_get_level");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -1);
 
     lua_pushnumber(interpreter, settings_get_level(key));
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_get_size(lua_State *interpreter)
@@ -187,14 +187,14 @@ int lua_api_settings_get_size(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_get_size");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -1);
 
     lua_pushnumber(interpreter, settings_get_size(key));
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_set_str(lua_State *interpreter)
@@ -205,7 +205,7 @@ int lua_api_settings_set_str(lua_State *interpreter)
     if (2 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_set_str");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -2);
@@ -213,7 +213,7 @@ int lua_api_settings_set_str(lua_State *interpreter)
 
     settings_set_str(key, value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_set_int(lua_State *interpreter)
@@ -224,7 +224,7 @@ int lua_api_settings_set_int(lua_State *interpreter)
     if (2 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_set_int");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -2);
@@ -232,7 +232,7 @@ int lua_api_settings_set_int(lua_State *interpreter)
 
     settings_set_int(key, value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_set_bool(lua_State *interpreter)
@@ -243,7 +243,7 @@ int lua_api_settings_set_bool(lua_State *interpreter)
     if (2 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_set_bool");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -2);
@@ -251,7 +251,7 @@ int lua_api_settings_set_bool(lua_State *interpreter)
 
     settings_set_bool(key, value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_set_time(lua_State *interpreter)
@@ -262,16 +262,16 @@ int lua_api_settings_set_time(lua_State *interpreter)
     if (2 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_set_time");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tostring(interpreter, -1);
 
     if (! settings_set_time(key, value))
-        return LUA_ERROR;
+        return LUA_FAILURE;
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_set_level(lua_State *interpreter)
@@ -282,16 +282,16 @@ int lua_api_settings_set_level(lua_State *interpreter)
     if (2 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_set_level");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tostring(interpreter, -1);
 
     if (! settings_set_level(key, value))
-        return LUA_ERROR;
+        return LUA_FAILURE;
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_set_size(lua_State *interpreter)
@@ -302,16 +302,16 @@ int lua_api_settings_set_size(lua_State *interpreter)
     if (2 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_set_size");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -2);
     value = lua_tostring(interpreter, -1);
 
     if (! settings_set_size(key, value))
-        return LUA_ERROR;
+        return LUA_FAILURE;
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_add_str(lua_State *interpreter)
@@ -323,7 +323,7 @@ int lua_api_settings_add_str(lua_State *interpreter)
     if (3 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_add_str");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     section = lua_tostring(interpreter, -3);
@@ -333,7 +333,7 @@ int lua_api_settings_add_str(lua_State *interpreter)
     lua_add_setting(key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_add_int(lua_State *interpreter)
@@ -345,7 +345,7 @@ int lua_api_settings_add_int(lua_State *interpreter)
     if (3 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_add_int");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     section = lua_tostring(interpreter, -3);
@@ -355,7 +355,7 @@ int lua_api_settings_add_int(lua_State *interpreter)
     lua_add_setting(key);
     settings_add_int_module(MODULE_NAME"/scripts", section, key, default_value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_add_bool(lua_State *interpreter)
@@ -367,7 +367,7 @@ int lua_api_settings_add_bool(lua_State *interpreter)
     if (3 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_add_bool");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     section = lua_tostring(interpreter, -3);
@@ -377,7 +377,7 @@ int lua_api_settings_add_bool(lua_State *interpreter)
     lua_add_setting(key);
     settings_add_bool_module(MODULE_NAME"/scripts", section, key, default_value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_add_time(lua_State *interpreter)
@@ -389,7 +389,7 @@ int lua_api_settings_add_time(lua_State *interpreter)
     if (3 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_add_time");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     section = lua_tostring(interpreter, -3);
@@ -399,7 +399,7 @@ int lua_api_settings_add_time(lua_State *interpreter)
     lua_add_setting(key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_add_level(lua_State *interpreter)
@@ -411,7 +411,7 @@ int lua_api_settings_add_level(lua_State *interpreter)
     if (3 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_add_level");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     section = lua_tostring(interpreter, -3);
@@ -421,7 +421,7 @@ int lua_api_settings_add_level(lua_State *interpreter)
     lua_add_setting(key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_add_size(lua_State *interpreter)
@@ -433,7 +433,7 @@ int lua_api_settings_add_size(lua_State *interpreter)
     if (3 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_add_size");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     section = lua_tostring(interpreter, -3);
@@ -443,7 +443,7 @@ int lua_api_settings_add_size(lua_State *interpreter)
     lua_add_setting(key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }
 
 int lua_api_settings_remove(lua_State *interpreter)
@@ -453,7 +453,7 @@ int lua_api_settings_remove(lua_State *interpreter)
     if (1 != lua_gettop(interpreter))
     {
         wrong_number_of_arguments("settings_remove");
-        return LUA_ERROR;
+        return LUA_FAILURE;
     }
 
     key = lua_tostring(interpreter, -1);
@@ -461,5 +461,5 @@ int lua_api_settings_remove(lua_State *interpreter)
     lua_remove_setting(key);
     settings_remove(key);
 
-    return LUA_OK;
+    return LUA_SUCCESS;
 }

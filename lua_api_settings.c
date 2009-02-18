@@ -247,7 +247,7 @@ int lua_api_settings_set_bool(lua_State *interpreter)
     }
 
     key = lua_tostring(interpreter, -2);
-    value = lua_tonumber(interpreter, -1);
+    value = lua_toboolean(interpreter, -1);
 
     settings_set_bool(key, value);
 

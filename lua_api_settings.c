@@ -362,7 +362,7 @@ int lua_api_settings_add_bool(lua_State *interpreter)
 {
     const char *section;
     const char *key;
-    int default_value;
+    int def = 0;
 
     if (3 != lua_gettop(interpreter))
     {
@@ -372,10 +372,10 @@ int lua_api_settings_add_bool(lua_State *interpreter)
 
     section = lua_tostring(interpreter, -3);
     key = lua_tostring(interpreter, -2);
-    default_value = lua_tonumber(interpreter, -1);
+    def = lua_toboolean(interpreter, -1);
 
     lua_add_setting(key);
-    settings_add_bool_module(MODULE_NAME"/scripts", section, key, default_value);
+    settings_add_bool_module(MODULE_NAME"/scripts", section, key, def);
 
     return LUA_SUCCESS;
 }

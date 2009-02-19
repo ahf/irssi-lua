@@ -1,6 +1,6 @@
 LUADOCS = $(shell ls *.luadoc)
 
-index.html :
+index.html: $(LUADOCS)
 	luadoc *.luadoc
 
 all: index.html

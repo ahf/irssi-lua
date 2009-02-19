@@ -1,0 +1,110 @@
+--- Irssi Lua bindings
+module "Irssi"
+
+--- Fetch a string value from a settings entry.
+-- @param key The key to fetch.
+-- @return The value associated with the key.
+function settings_get_str(key)
+
+--- Fetch an integer value from a settings entry.
+-- @param key The key to fetch.
+-- @return The value associated with the key.
+function settings_get_int(key)
+
+--- Fetch a boolean value from a settings entry.
+-- @param key The key to fetch.
+-- @return The value associated with the key.
+function settings_get_bool(key)
+
+--- Fetch a boolean value from a settings entry.
+-- @param key The key to fetch.
+-- @return The value associated with the key.
+function settings_get_time(key)
+
+--- Fetch a level value from a settings entry.
+-- @param key The key to fetch.
+-- @return The value associated with the key.
+function settings_get_level(key)
+
+--- Fetch a size value from a settings entry.
+-- @param key The key to fetch.
+-- @return The value associated with the key.
+function settings_get_size(key)
+
+
+
+--- Set a settings entry to a specific string value.
+-- @param key The key you want to alter.
+-- @param value The value to use.
+function settings_set_str(key, value)
+
+--- Set a settings entry to a specific integer value.
+-- @param key The key you want to alter.
+-- @param value The value to use.
+function settings_set_int(key, value)
+
+--- Set a settings entry to a specific boolean value.
+-- @param key The key you want to alter.
+-- @param value The value to use.
+function settings_set_bool(key, value)
+
+--- Set a settings entry to a specific time value.
+-- @param key The key you want to alter.
+-- @param value The value to use.
+function settings_set_time(key, value)
+
+--- Set a settings entry to a specific level value.
+-- @param key The key you want to alter.
+-- @param value The value to use.
+function settings_set_level(key, value)
+
+--- Set a settings entry to a specific size value.
+-- @param key The key you want to alter.
+-- @param value The value to use.
+function settings_set_size(key, value)
+
+
+
+--- Add a new string settings entry.
+-- @param section The section for the key.
+-- @param key The key.
+-- @param default_value The default value for the key.
+function settings_add_str(section, key, default_value)
+
+--- Add a new integer settings entry.
+-- @param section The section for the key.
+-- @param key The key.
+-- @param default_value The default value for the key.
+function settings_add_int(section, key, default_value)
+
+--- Add a new boolean settings entry.
+-- @param section The section for the key.
+-- @param key The key.
+-- @param default_value The default value for the key.
+function settings_add_bool(section, key, default_value)
+
+--- Add a new time settings entry.
+-- @param section The section for the key.
+-- @param key The key.
+-- @param default_value The default value for the key.
+function settings_add_time(section, key, default_value)
+
+--- Add a new level settings entry.
+-- @param section The section for the key.
+-- @param key The key.
+-- @param default_value The default value for the key.
+function settings_add_level(section, key, default_value)
+
+--- Add a new size settings entry.
+-- @param section The section for the key.
+-- @param key The key.
+-- @param default_value The default value for the key.
+function settings_add_size(section, key, default_value)
+
+
+
+--- Remove a settings entry.
+-- @param key The key to remove.
+function settings_remove(key)
+
+-- vim: set spell spelllang=en sw=4 sts=4 et tw=80 syntax=lua :

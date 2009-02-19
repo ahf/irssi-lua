@@ -1,3 +1,5 @@
 *.o
 *.so
+*.html
+*.css
 core

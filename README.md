@@ -12,4 +12,4 @@ Contributions to Irssi-Lua are welcome:
 
 ## Authors
 
- * Alexander Færøy <[ahf@irssi.org](mailto:ahf@irssi.org)>
+ * Alexander Færøy &lt;ahf@irssi.org&gt;

@@ -32,10 +32,10 @@ static void lua_settings_free(gpointer key, gpointer list, gpointer user_data)
     g_list_free(list);
 }
 
-static void lua_add_setting(const char *key)
+static void lua_add_setting(lua_State *interpreter, const char *key)
 {
     GList *list;
-    char *script = get_current_script();
+    char *script = get_caller_name(interpreter);
 
     g_return_if_fail(NULL != script);
 
@@ -44,10 +44,10 @@ static void lua_add_setting(const char *key)
     g_hash_table_insert(lua_settings, script, list);
 }
 
-static void lua_remove_setting(const char *key)
+static void lua_remove_setting(lua_State *interpreter, const char *key)
 {
     GList *list, *pos;
-    char *script = get_current_script();
+    char *script = get_caller_name(interpreter);
 
     g_return_if_fail(NULL != script);
 
@@ -330,7 +330,7 @@ int lua_api_settings_add_str(lua_State *interpreter)
     key = lua_tostring(interpreter, -2);
     default_value = lua_tostring(interpreter, -1);
 
-    lua_add_setting(key);
+    lua_add_setting(interpreter, key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_SUCCESS;
@@ -352,7 +352,7 @@ int lua_api_settings_add_int(lua_State *interpreter)
     key = lua_tostring(interpreter, -2);
     default_value = lua_tonumber(interpreter, -1);
 
-    lua_add_setting(key);
+    lua_add_setting(interpreter, key);
     settings_add_int_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_SUCCESS;
@@ -374,7 +374,7 @@ int lua_api_settings_add_bool(lua_State *interpreter)
     key = lua_tostring(interpreter, -2);
     def = lua_toboolean(interpreter, -1);
 
-    lua_add_setting(key);
+    lua_add_setting(interpreter, key);
     settings_add_bool_module(MODULE_NAME"/scripts", section, key, def);
 
     return LUA_SUCCESS;
@@ -396,7 +396,7 @@ int lua_api_settings_add_time(lua_State *interpreter)
     key = lua_tostring(interpreter, -2);
     default_value = lua_tostring(interpreter, -1);
 
-    lua_add_setting(key);
+    lua_add_setting(interpreter, key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_SUCCESS;
@@ -418,7 +418,7 @@ int lua_api_settings_add_level(lua_State *interpreter)
     key = lua_tostring(interpreter, -2);
     default_value = lua_tostring(interpreter, -1);
 
-    lua_add_setting(key);
+    lua_add_setting(interpreter, key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_SUCCESS;
@@ -440,7 +440,7 @@ int lua_api_settings_add_size(lua_State *interpreter)
     key = lua_tostring(interpreter, -2);
     default_value = lua_tostring(interpreter, -1);
 
-    lua_add_setting(key);
+    lua_add_setting(interpreter, key);
     settings_add_str_module(MODULE_NAME"/scripts", section, key, default_value);
 
     return LUA_SUCCESS;
@@ -458,7 +458,7 @@ int lua_api_settings_remove(lua_State *interpreter)
 
     key = lua_tostring(interpreter, -1);
 
-    lua_remove_setting(key);
+    lua_remove_setting(interpreter, key);
     settings_remove(key);
 
     return LUA_SUCCESS;

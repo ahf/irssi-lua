@@ -71,6 +71,20 @@ void register_lua_api(lua_State *interpreter, const char *script_name)
     lua_setglobal(interpreter, "__irssi_script_information__");
 }
 
+const char *get_caller_name(lua_State *interpreter)
+{
+    const char *script_name;
+
+    lua_getglobal(interpreter, "__irssi_script_information__");
+    lua_pushstring(interpreter, "script_name");
+    lua_gettable(interpreter, -2);
+    script_name = lua_tostring(interpreter, -1);
+
+    g_warning("Script name: %s", script_name);
+
+    return script_name;
+}
+
 void lua_api_init()
 {
     lua_api_settings_init();

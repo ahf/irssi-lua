@@ -23,17 +23,11 @@
 #include <lua_api.h>
 
 static GHashTable *lua_scripts = NULL;
-static char *current_lua_script = NULL;
 
 static void free_lua_script_hash_table_entry(gpointer key, gpointer interpreter, gpointer user_data)
 {
     g_free(key);
     lua_close(interpreter);
-}
-
-char *get_current_script()
-{
-    return current_lua_script;
 }
 
 GHashTable *get_currently_loaded_scripts()
@@ -50,6 +44,7 @@ void lua_load_script(const char *script_name)
 {
     struct stat stat_buf;
     lua_State *interpreter;
+    char *script;
 
     if (NULL != get_script(script_name))
     {
@@ -72,14 +67,14 @@ void lua_load_script(const char *script_name)
     }
 
     luaL_openlibs(interpreter);
-    current_lua_script = g_strdup(script_name);
-    register_lua_api(interpreter, current_lua_script);
+    script = g_strdup(script_name);
+    register_lua_api(interpreter, script);
 
     if (0 != luaL_loadfile(interpreter, script_name))
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to load script: %s", lua_tostring(interpreter, -1));
         lua_close(interpreter);
-        g_free(current_lua_script);
+        g_free(script);
         return;
     }
 
@@ -87,11 +82,11 @@ void lua_load_script(const char *script_name)
     {
         printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Unable to execute the script: %s", lua_tostring(interpreter, -1));
         lua_close(interpreter);
-        g_free(current_lua_script);
+        g_free(script);
         return;
     }
 
-    g_hash_table_insert(lua_scripts, current_lua_script, interpreter);
+    g_hash_table_insert(lua_scripts, script, interpreter);
 
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "Script \"%s\" loaded.", script_name);
 }

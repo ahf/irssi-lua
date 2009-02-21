@@ -27,7 +27,6 @@
 #include <lauxlib.h>
 
 lua_State *get_script(const char *script_name);
-char *get_current_script();
 
 GHashTable *get_currently_loaded_scripts();
 

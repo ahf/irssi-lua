@@ -30,7 +30,7 @@
 #define LUA_SUCCESS 1
 #define LUA_FAILURE 0
 
-void register_lua_api(lua_State *interpreter);
+void register_lua_api(lua_State *interpreter, const char *script_name);
 void wrong_number_of_arguments(const char *function_name);
 
 void lua_api_init();

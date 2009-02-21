@@ -60,9 +60,15 @@ static const luaL_Reg irssi_lua_functions[] = {
     { NULL, NULL }
 };
 
-void register_lua_api(lua_State *interpreter)
+void register_lua_api(lua_State *interpreter, const char *script_name)
 {
     luaL_openlib(interpreter, "Irssi", irssi_lua_functions, 0);
+
+    lua_newtable(interpreter);
+    lua_pushstring(interpreter, "script_name");
+    lua_pushstring(interpreter, script_name);
+    lua_rawset(interpreter, -3);
+    lua_setglobal(interpreter, "__irssi_script_information__");
 }
 
 void lua_api_init()

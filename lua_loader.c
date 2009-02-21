@@ -72,8 +72,8 @@ void lua_load_script(const char *script_name)
     }
 
     luaL_openlibs(interpreter);
-    register_lua_api(interpreter);
     current_lua_script = g_strdup(script_name);
+    register_lua_api(interpreter, current_lua_script);
 
     if (0 != luaL_loadfile(interpreter, script_name))
     {

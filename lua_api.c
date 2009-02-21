@@ -81,8 +81,6 @@ char *get_caller_name(lua_State *interpreter)
     script_name = g_strdup(lua_tostring(interpreter, -1));
     lua_pop(interpreter, 2);
 
-    g_warning("Script name: %s", script_name);
-
     return script_name;
 }
 

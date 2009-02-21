@@ -42,6 +42,7 @@ static void lua_add_setting(lua_State *interpreter, const char *key)
     list = g_hash_table_lookup(lua_settings, script);
     list = g_list_append(list, g_strdup(key));
     g_hash_table_insert(lua_settings, script, list);
+    g_free(script);
 }
 
 static void lua_remove_setting(lua_State *interpreter, const char *key)
@@ -60,6 +61,8 @@ static void lua_remove_setting(lua_State *interpreter, const char *key)
         list = g_list_remove(list, pos->data);
         g_hash_table_insert(lua_settings, script, list);
     }
+
+    g_free(script);
 }
 
 static void sig_lua_script_destroyed(char *script)

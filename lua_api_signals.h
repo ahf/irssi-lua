@@ -24,6 +24,7 @@
 #include <lua_api.h>
 
 int lua_api_signal_stop(lua_State *interpreter);
+int lua_api_signal_stop_by_name(lua_State *interpreter);
 
 void lua_api_signals_init();
 void lua_api_signals_deinit();

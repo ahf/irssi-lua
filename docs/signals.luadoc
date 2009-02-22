@@ -4,4 +4,8 @@ module "Irssi"
 --- Stop the signal that is currently being emitted.
 function signal_stop()
 
+--- Stop the signal with a specific name that is currently being emitted.
+-- @param signal_name The name of the signal to stop.
+function signal_stop_by_name(signal_name)
+
 -- vim: set spell spelllang=en sw=4 sts=4 et tw=80 syntax=lua :

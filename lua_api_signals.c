@@ -34,6 +34,23 @@ int lua_api_signal_stop(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
+int lua_api_signal_stop_by_name(lua_State *interpreter)
+{
+    const char *signal_name;
+
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("signal_stop_by_name");
+        return LUA_FAILURE;
+    }
+
+    signal_name = lua_tostring(interpreter, -1);
+
+    signal_stop_by_name(signal_name);
+
+    return LUA_SUCCESS;
+}
+
 void lua_api_signalss_init()
 {
 }

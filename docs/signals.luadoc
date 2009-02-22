@@ -1,0 +1,7 @@
+--- Irssi Lua bindings
+module "Irssi"
+
+--- Stop the signal that is currently being emitted.
+function signal_stop()
+
+-- vim: set spell spelllang=en sw=4 sts=4 et tw=80 syntax=lua :

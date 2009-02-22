@@ -25,6 +25,7 @@
 #include <lua_api_settings.h>
 #include <lua_api_output.h>
 #include <lua_api_commands.h>
+#include <lua_api_signals.h>
 
 static const luaL_Reg irssi_lua_functions[] = {
     { "print", lua_api_print },
@@ -88,10 +89,12 @@ void lua_api_init()
 {
     lua_api_settings_init();
     lua_api_commands_init();
+    lua_api_signals_init();
 }
 
 void lua_api_deinit()
 {
     lua_api_settings_deinit();
     lua_api_commands_deinit();
+    lua_api_signals_deinit();
 }

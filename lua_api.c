@@ -26,11 +26,6 @@
 #include <lua_api_output.h>
 #include <lua_api_commands.h>
 
-void wrong_number_of_arguments(const char *function_name)
-{
-    printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Wrong number of arguments for function \"%s\"", function_name);
-}
-
 static const luaL_Reg irssi_lua_functions[] = {
     { "print", lua_api_print },
 
@@ -59,6 +54,11 @@ static const luaL_Reg irssi_lua_functions[] = {
 
     { NULL, NULL }
 };
+
+void wrong_number_of_arguments(const char *function_name)
+{
+    printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Wrong number of arguments for function \"%s\"", function_name);
+}
 
 void register_lua_api(lua_State *interpreter, const char *script_name)
 {

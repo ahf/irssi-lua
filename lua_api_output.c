@@ -34,7 +34,7 @@ int lua_api_print(lua_State *interpreter)
 
     n = lua_gettop(interpreter);
 
-    if (2 < n)
+    if (2 < n || 0 >= n)
     {
         wrong_number_of_arguments("print");
         return LUA_FAILURE;

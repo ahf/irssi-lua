@@ -31,7 +31,8 @@
 #define LUA_FAILURE 0
 
 void register_lua_api(lua_State *interpreter, const char *script_name);
-void wrong_number_of_arguments(const char *function_name);
+void arity_mismatch(const char *function_name);
+
 char *get_caller_name(lua_State *interpreter);
 
 void lua_api_init();

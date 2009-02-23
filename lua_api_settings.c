@@ -104,7 +104,7 @@ int lua_api_settings_get_str(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_get_str");
+        arity_mismatch("settings_get_str");
         return LUA_FAILURE;
     }
 
@@ -121,7 +121,7 @@ int lua_api_settings_get_int(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_get_int");
+        arity_mismatch("settings_get_int");
         return LUA_FAILURE;
     }
 
@@ -138,7 +138,7 @@ int lua_api_settings_get_bool(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_get_bool");
+        arity_mismatch("settings_get_bool");
         return LUA_FAILURE;
     }
 
@@ -155,7 +155,7 @@ int lua_api_settings_get_time(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_get_time");
+        arity_mismatch("settings_get_time");
         return LUA_FAILURE;
     }
 
@@ -172,7 +172,7 @@ int lua_api_settings_get_level(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_get_level");
+        arity_mismatch("settings_get_level");
         return LUA_FAILURE;
     }
 
@@ -189,7 +189,7 @@ int lua_api_settings_get_size(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_get_size");
+        arity_mismatch("settings_get_size");
         return LUA_FAILURE;
     }
 
@@ -207,7 +207,7 @@ int lua_api_settings_set_str(lua_State *interpreter)
 
     if (2 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_set_str");
+        arity_mismatch("settings_set_str");
         return LUA_FAILURE;
     }
 
@@ -226,7 +226,7 @@ int lua_api_settings_set_int(lua_State *interpreter)
 
     if (2 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_set_int");
+        arity_mismatch("settings_set_int");
         return LUA_FAILURE;
     }
 
@@ -245,7 +245,7 @@ int lua_api_settings_set_bool(lua_State *interpreter)
 
     if (2 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_set_bool");
+        arity_mismatch("settings_set_bool");
         return LUA_FAILURE;
     }
 
@@ -264,7 +264,7 @@ int lua_api_settings_set_time(lua_State *interpreter)
 
     if (2 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_set_time");
+        arity_mismatch("settings_set_time");
         return LUA_FAILURE;
     }
 
@@ -284,7 +284,7 @@ int lua_api_settings_set_level(lua_State *interpreter)
 
     if (2 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_set_level");
+        arity_mismatch("settings_set_level");
         return LUA_FAILURE;
     }
 
@@ -304,7 +304,7 @@ int lua_api_settings_set_size(lua_State *interpreter)
 
     if (2 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_set_size");
+        arity_mismatch("settings_set_size");
         return LUA_FAILURE;
     }
 
@@ -325,7 +325,7 @@ int lua_api_settings_add_str(lua_State *interpreter)
 
     if (3 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_add_str");
+        arity_mismatch("settings_add_str");
         return LUA_FAILURE;
     }
 
@@ -347,7 +347,7 @@ int lua_api_settings_add_int(lua_State *interpreter)
 
     if (3 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_add_int");
+        arity_mismatch("settings_add_int");
         return LUA_FAILURE;
     }
 
@@ -369,7 +369,7 @@ int lua_api_settings_add_bool(lua_State *interpreter)
 
     if (3 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_add_bool");
+        arity_mismatch("settings_add_bool");
         return LUA_FAILURE;
     }
 
@@ -391,7 +391,7 @@ int lua_api_settings_add_time(lua_State *interpreter)
 
     if (3 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_add_time");
+        arity_mismatch("settings_add_time");
         return LUA_FAILURE;
     }
 
@@ -413,7 +413,7 @@ int lua_api_settings_add_level(lua_State *interpreter)
 
     if (3 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_add_level");
+        arity_mismatch("settings_add_level");
         return LUA_FAILURE;
     }
 
@@ -435,7 +435,7 @@ int lua_api_settings_add_size(lua_State *interpreter)
 
     if (3 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_add_size");
+        arity_mismatch("settings_add_size");
         return LUA_FAILURE;
     }
 
@@ -455,7 +455,7 @@ int lua_api_settings_remove(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("settings_remove");
+        arity_mismatch("settings_remove");
         return LUA_FAILURE;
     }
 

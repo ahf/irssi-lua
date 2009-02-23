@@ -25,7 +25,7 @@ int lua_api_signal_stop(lua_State *interpreter)
 {
     if (0 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("signal_stop");
+        arity_mismatch("signal_stop");
         return LUA_FAILURE;
     }
 
@@ -40,7 +40,7 @@ int lua_api_signal_stop_by_name(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("signal_stop_by_name");
+        arity_mismatch("signal_stop_by_name");
         return LUA_FAILURE;
     }
 

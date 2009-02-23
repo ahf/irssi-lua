@@ -36,7 +36,7 @@ int lua_api_print(lua_State *interpreter)
 
     if (2 < n || 0 >= n)
     {
-        wrong_number_of_arguments("print");
+        arity_mismatch("print");
         return LUA_FAILURE;
     }
 
@@ -63,7 +63,7 @@ int lua_api_level2bits(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("level2bits");
+        arity_mismatch("level2bits");
         return LUA_FAILURE;
     }
 
@@ -82,7 +82,7 @@ int lua_api_bits2level(lua_State *interpreter)
 
     if (1 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("bits2level");
+        arity_mismatch("bits2level");
         return LUA_FAILURE;
     }
 
@@ -100,7 +100,7 @@ int lua_api_combine_level(lua_State *interpreter)
 
     if (2 != lua_gettop(interpreter))
     {
-        wrong_number_of_arguments("combine_level");
+        arity_mismatch("combine_level");
         return LUA_FAILURE;
     }
 

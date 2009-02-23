@@ -28,4 +28,6 @@ void lua_api_output_deinit();
 
 int lua_api_print(lua_State *interpreter);
 
+void register_lua_output_api(lua_State *interpreter);
+
 #endif

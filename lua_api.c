@@ -29,6 +29,7 @@
 
 static const luaL_Reg irssi_lua_functions[] = {
     { "print", lua_api_print },
+    { "printtext", lua_api_print },
 
     { "settings_get_str", lua_api_settings_get_str },
     { "settings_get_int", lua_api_settings_get_int },
@@ -73,6 +74,8 @@ void register_lua_api(lua_State *interpreter, const char *script_name)
     lua_pushstring(interpreter, script_name);
     lua_rawset(interpreter, -3);
     lua_setglobal(interpreter, "__irssi_script_information__");
+
+    register_lua_output_api(interpreter);
 }
 
 char *get_caller_name(lua_State *interpreter)

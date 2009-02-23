@@ -30,6 +30,7 @@
 static const luaL_Reg irssi_lua_functions[] = {
     { "print", lua_api_print },
     { "printtext", lua_api_print },
+    { "level2bits", lua_api_level2bits },
 
     { "settings_get_str", lua_api_settings_get_str },
     { "settings_get_int", lua_api_settings_get_int },

@@ -56,6 +56,26 @@ int lua_api_print(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
+int lua_api_level2bits(lua_State *interpreter)
+{
+    const char *level;
+    int number;
+
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("level2bits");
+        return LUA_FAILURE;
+    }
+
+    level = lua_tostring(interpreter, -1);
+
+    number = level2bits(level);
+
+    lua_pushnumber(interpreter, number);
+
+    return LUA_SUCCESS;
+}
+
 void register_lua_output_api(lua_State *interpreter)
 {
     lua_newtable(interpreter);

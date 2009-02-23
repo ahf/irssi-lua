@@ -51,10 +51,10 @@ int lua_api_signal_stop_by_name(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-void lua_api_signalss_init()
+void lua_api_signals_init()
 {
 }
 
-void lua_api_signalss_deinit()
+void lua_api_signals_deinit()
 {
 }

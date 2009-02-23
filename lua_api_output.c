@@ -76,6 +76,23 @@ int lua_api_level2bits(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
+int lua_api_bits2level(lua_State *interpreter)
+{
+    int level_number;
+
+    if (1 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("bits2level");
+        return LUA_FAILURE;
+    }
+
+    level_number = lua_tonumber(interpreter, -1);
+
+    lua_pushstring(interpreter, bits2level(level_number));
+
+    return LUA_SUCCESS;
+}
+
 void register_lua_output_api(lua_State *interpreter)
 {
     lua_newtable(interpreter);

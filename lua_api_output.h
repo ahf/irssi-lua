@@ -28,6 +28,7 @@ void lua_api_output_deinit();
 
 int lua_api_print(lua_State *interpreter);
 int lua_api_level2bits(lua_State *interpreter);
+int lua_api_bits2level(lua_State *interpreter);
 
 void register_lua_output_api(lua_State *interpreter);
 

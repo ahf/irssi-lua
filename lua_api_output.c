@@ -93,6 +93,25 @@ int lua_api_bits2level(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
+int lua_api_combine_level(lua_State *interpreter)
+{
+    int level;
+    const char *str;
+
+    if (2 != lua_gettop(interpreter))
+    {
+        wrong_number_of_arguments("combine_level");
+        return LUA_FAILURE;
+    }
+
+    level = lua_tonumber(interpreter, -2);
+    str = lua_tostring(interpreter, -1);
+
+    lua_pushnumber(interpreter, combine_level(level, str));
+
+    return LUA_SUCCESS;
+}
+
 void register_lua_output_api(lua_State *interpreter)
 {
     lua_newtable(interpreter);

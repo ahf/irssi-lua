@@ -37,3 +37,11 @@ int lua_api_print(lua_State *interpreter)
 
     return LUA_SUCCESS;
 }
+
+void lua_api_output_init()
+{
+}
+
+void lua_api_output_deinit()
+{
+}

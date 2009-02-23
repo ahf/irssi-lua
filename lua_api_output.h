@@ -23,6 +23,9 @@
 
 #include <lua_api.h>
 
+void lua_api_output_init();
+void lua_api_output_deinit();
+
 int lua_api_print(lua_State *interpreter);
 
 #endif

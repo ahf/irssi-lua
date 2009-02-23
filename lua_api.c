@@ -93,6 +93,7 @@ void lua_api_init()
     lua_api_settings_init();
     lua_api_commands_init();
     lua_api_signals_init();
+    lua_api_output_init();
 }
 
 void lua_api_deinit()
@@ -100,4 +101,5 @@ void lua_api_deinit()
     lua_api_settings_deinit();
     lua_api_commands_deinit();
     lua_api_signals_deinit();
+    lua_api_output_deinit();
 }

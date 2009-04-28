@@ -62,7 +62,7 @@ int lua_api_level2bits(lua_State *interpreter) {
 
     level = lua_tostring(interpreter, -1);
 
-    number = level2bits(level);
+    number = level2bits(level, NULL);
 
     lua_pushnumber(interpreter, number);
 

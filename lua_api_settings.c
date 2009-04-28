@@ -26,14 +26,12 @@
 
 static GHashTable *lua_settings = NULL;
 
-static void lua_settings_free(gpointer key, gpointer list, gpointer user_data)
-{
+static void lua_settings_free(gpointer key, gpointer list, gpointer user_data) {
     g_list_foreach(list, (GFunc)g_free, user_data);
     g_list_free(list);
 }
 
-static void lua_add_setting(lua_State *interpreter, const char *key)
-{
+static void lua_add_setting(lua_State *interpreter, const char *key) {
     GList *list;
     char *script = get_caller_name(interpreter);
 
@@ -45,8 +43,7 @@ static void lua_add_setting(lua_State *interpreter, const char *key)
     g_free(script);
 }
 
-static void lua_remove_setting(lua_State *interpreter, const char *key)
-{
+static void lua_remove_setting(lua_State *interpreter, const char *key) {
     GList *list, *pos;
     char *script = get_caller_name(interpreter);
 
@@ -56,8 +53,7 @@ static void lua_remove_setting(lua_State *interpreter, const char *key)
 
     pos = glist_find_icase_string(list, key);
 
-    if (NULL != pos)
-    {
+    if (NULL != pos) {
         list = g_list_remove(list, pos->data);
         g_hash_table_insert(lua_settings, script, list);
     }
@@ -65,14 +61,12 @@ static void lua_remove_setting(lua_State *interpreter, const char *key)
     g_free(script);
 }
 
-static void sig_lua_script_destroyed(char *script)
-{
+static void sig_lua_script_destroyed(char *script) {
     GList *list;
 
     list = g_hash_table_lookup(lua_settings, script);
 
-    if (NULL != list)
-    {
+    if (NULL != list) {
         GList *tmp;
 
         for (tmp = list; NULL != tmp; tmp = tmp->next)
@@ -83,27 +77,23 @@ static void sig_lua_script_destroyed(char *script)
     }
 }
 
-void lua_api_settings_init()
-{
+void lua_api_settings_init() {
     lua_settings = g_hash_table_new(g_str_hash, g_str_equal);
 
     signal_add("lua script destroyed", (SIGNAL_FUNC)sig_lua_script_destroyed);
 }
 
-void lua_api_settings_deinit()
-{
+void lua_api_settings_deinit() {
     g_hash_table_foreach(lua_settings, lua_settings_free, NULL);
     g_hash_table_destroy(lua_settings);
 
     signal_remove("lua script destroyed", (SIGNAL_FUNC)sig_lua_script_destroyed);
 }
 
-int lua_api_settings_get_str(lua_State *interpreter)
-{
+int lua_api_settings_get_str(lua_State *interpreter) {
     const char *key;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("settings_get_str");
         return LUA_FAILURE;
     }
@@ -115,12 +105,10 @@ int lua_api_settings_get_str(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_get_int(lua_State *interpreter)
-{
+int lua_api_settings_get_int(lua_State *interpreter) {
     const char *key;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("settings_get_int");
         return LUA_FAILURE;
     }
@@ -132,12 +120,10 @@ int lua_api_settings_get_int(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_get_bool(lua_State *interpreter)
-{
+int lua_api_settings_get_bool(lua_State *interpreter) {
     const char *key;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("settings_get_bool");
         return LUA_FAILURE;
     }
@@ -149,12 +135,10 @@ int lua_api_settings_get_bool(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_get_time(lua_State *interpreter)
-{
+int lua_api_settings_get_time(lua_State *interpreter) {
     const char *key;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("settings_get_time");
         return LUA_FAILURE;
     }
@@ -166,12 +150,10 @@ int lua_api_settings_get_time(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_get_level(lua_State *interpreter)
-{
+int lua_api_settings_get_level(lua_State *interpreter) {
     const char *key;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("settings_get_level");
         return LUA_FAILURE;
     }
@@ -183,12 +165,10 @@ int lua_api_settings_get_level(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_get_size(lua_State *interpreter)
-{
+int lua_api_settings_get_size(lua_State *interpreter) {
     const char *key;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("settings_get_size");
         return LUA_FAILURE;
     }
@@ -200,13 +180,11 @@ int lua_api_settings_get_size(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_set_str(lua_State *interpreter)
-{
+int lua_api_settings_set_str(lua_State *interpreter) {
     const char *key;
     const char *value;
 
-    if (2 != lua_gettop(interpreter))
-    {
+    if (2 != lua_gettop(interpreter)) {
         arity_mismatch("settings_set_str");
         return LUA_FAILURE;
     }
@@ -219,13 +197,11 @@ int lua_api_settings_set_str(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_set_int(lua_State *interpreter)
-{
+int lua_api_settings_set_int(lua_State *interpreter) {
     const char *key;
     int value;
 
-    if (2 != lua_gettop(interpreter))
-    {
+    if (2 != lua_gettop(interpreter)) {
         arity_mismatch("settings_set_int");
         return LUA_FAILURE;
     }
@@ -238,13 +214,11 @@ int lua_api_settings_set_int(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_set_bool(lua_State *interpreter)
-{
+int lua_api_settings_set_bool(lua_State *interpreter) {
     const char *key;
     int value;
 
-    if (2 != lua_gettop(interpreter))
-    {
+    if (2 != lua_gettop(interpreter)) {
         arity_mismatch("settings_set_bool");
         return LUA_FAILURE;
     }
@@ -257,13 +231,11 @@ int lua_api_settings_set_bool(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_set_time(lua_State *interpreter)
-{
+int lua_api_settings_set_time(lua_State *interpreter) {
     const char *key;
     const char *value;
 
-    if (2 != lua_gettop(interpreter))
-    {
+    if (2 != lua_gettop(interpreter)) {
         arity_mismatch("settings_set_time");
         return LUA_FAILURE;
     }
@@ -277,13 +249,11 @@ int lua_api_settings_set_time(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_set_level(lua_State *interpreter)
-{
+int lua_api_settings_set_level(lua_State *interpreter) {
     const char *key;
     const char *value;
 
-    if (2 != lua_gettop(interpreter))
-    {
+    if (2 != lua_gettop(interpreter)) {
         arity_mismatch("settings_set_level");
         return LUA_FAILURE;
     }
@@ -297,13 +267,11 @@ int lua_api_settings_set_level(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_set_size(lua_State *interpreter)
-{
+int lua_api_settings_set_size(lua_State *interpreter) {
     const char *key;
     const char *value;
 
-    if (2 != lua_gettop(interpreter))
-    {
+    if (2 != lua_gettop(interpreter)) {
         arity_mismatch("settings_set_size");
         return LUA_FAILURE;
     }
@@ -323,8 +291,7 @@ int lua_api_settings_add_str(lua_State *interpreter)
     const char *key;
     const char *default_value;
 
-    if (3 != lua_gettop(interpreter))
-    {
+    if (3 != lua_gettop(interpreter)) {
         arity_mismatch("settings_add_str");
         return LUA_FAILURE;
     }
@@ -339,14 +306,12 @@ int lua_api_settings_add_str(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_add_int(lua_State *interpreter)
-{
+int lua_api_settings_add_int(lua_State *interpreter) {
     const char *section;
     const char *key;
     int default_value;
 
-    if (3 != lua_gettop(interpreter))
-    {
+    if (3 != lua_gettop(interpreter)) {
         arity_mismatch("settings_add_int");
         return LUA_FAILURE;
     }
@@ -361,14 +326,12 @@ int lua_api_settings_add_int(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_add_bool(lua_State *interpreter)
-{
+int lua_api_settings_add_bool(lua_State *interpreter) {
     const char *section;
     const char *key;
     int def = 0;
 
-    if (3 != lua_gettop(interpreter))
-    {
+    if (3 != lua_gettop(interpreter)) {
         arity_mismatch("settings_add_bool");
         return LUA_FAILURE;
     }
@@ -383,14 +346,12 @@ int lua_api_settings_add_bool(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_add_time(lua_State *interpreter)
-{
+int lua_api_settings_add_time(lua_State *interpreter) {
     const char *section;
     const char *key;
     const char *default_value;
 
-    if (3 != lua_gettop(interpreter))
-    {
+    if (3 != lua_gettop(interpreter)) {
         arity_mismatch("settings_add_time");
         return LUA_FAILURE;
     }
@@ -405,14 +366,12 @@ int lua_api_settings_add_time(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_add_level(lua_State *interpreter)
-{
+int lua_api_settings_add_level(lua_State *interpreter) {
     const char *section;
     const char *key;
     const char *default_value;
 
-    if (3 != lua_gettop(interpreter))
-    {
+    if (3 != lua_gettop(interpreter)) {
         arity_mismatch("settings_add_level");
         return LUA_FAILURE;
     }
@@ -427,14 +386,12 @@ int lua_api_settings_add_level(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_settings_add_size(lua_State *interpreter)
-{
+int lua_api_settings_add_size(lua_State *interpreter) {
     const char *section;
     const char *key;
     const char *default_value;
 
-    if (3 != lua_gettop(interpreter))
-    {
+    if (3 != lua_gettop(interpreter)) {
         arity_mismatch("settings_add_size");
         return LUA_FAILURE;
     }
@@ -453,8 +410,7 @@ int lua_api_settings_remove(lua_State *interpreter)
 {
     const char *key;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("settings_remove");
         return LUA_FAILURE;
     }

@@ -22,17 +22,14 @@
 
 #include <glib.h>
 
-void print_stack(lua_State *interpreter)
-{
+void print_stack(lua_State *interpreter) {
     int i;
     int size = lua_gettop(interpreter);
 
-    for (i = 1; i <= size; i++)
-    {
+    for (i = 1; i <= size; i++) {
         int type = lua_type(interpreter, i);
 
-        switch (type)
-        {
+        switch (type) {
             case LUA_TSTRING:
                 g_warning("%i: String: %s", i, lua_tostring(interpreter, i));
                 break;

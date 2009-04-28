@@ -63,13 +63,11 @@ static const luaL_Reg irssi_lua_functions[] = {
     { NULL, NULL }
 };
 
-void arity_mismatch(const char *function_name)
-{
+void arity_mismatch(const char *function_name) {
     printtext(NULL, NULL, MSGLEVEL_CLIENTERROR, "Arity mismatch for function \"%s\"", function_name);
 }
 
-void register_lua_api(lua_State *interpreter, const char *script_name)
-{
+void register_lua_api(lua_State *interpreter, const char *script_name) {
     luaL_openlib(interpreter, "Irssi", irssi_lua_functions, 0);
 
     lua_newtable(interpreter);
@@ -81,8 +79,7 @@ void register_lua_api(lua_State *interpreter, const char *script_name)
     register_lua_output_api(interpreter);
 }
 
-char *get_caller_name(lua_State *interpreter)
-{
+char *get_caller_name(lua_State *interpreter) {
     char *script_name;
 
     lua_getglobal(interpreter, "__irssi_script_information__");
@@ -94,8 +91,7 @@ char *get_caller_name(lua_State *interpreter)
     return script_name;
 }
 
-void lua_api_init()
-{
+void lua_api_init() {
     lua_api_settings_init();
     lua_api_commands_init();
     lua_api_signals_init();

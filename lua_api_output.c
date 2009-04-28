@@ -26,27 +26,22 @@
     lua_pushnumber(interpreter, value); \
     lua_rawset(interpreter, -3);
 
-int lua_api_print(lua_State *interpreter)
-{
+int lua_api_print(lua_State *interpreter) {
     const char *message;
     int n;
     int msglevel;
 
     n = lua_gettop(interpreter);
 
-    if (2 < n || 0 >= n)
-    {
+    if (2 < n || 0 >= n) {
         arity_mismatch("print");
         return LUA_FAILURE;
     }
 
-    if (2 != n)
-    {
+    if (2 != n) {
         msglevel = MSGLEVEL_CLIENTCRAP;
         message = lua_tostring(interpreter, -1);
-    }
-    else
-    {
+    } else {
         msglevel = lua_tonumber(interpreter, -1);
         message = lua_tostring(interpreter, -2);
     }
@@ -56,13 +51,11 @@ int lua_api_print(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_level2bits(lua_State *interpreter)
-{
+int lua_api_level2bits(lua_State *interpreter) {
     const char *level;
     int number;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("level2bits");
         return LUA_FAILURE;
     }
@@ -76,12 +69,10 @@ int lua_api_level2bits(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_bits2level(lua_State *interpreter)
-{
+int lua_api_bits2level(lua_State *interpreter) {
     int level_number;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("bits2level");
         return LUA_FAILURE;
     }
@@ -93,13 +84,11 @@ int lua_api_bits2level(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_combine_level(lua_State *interpreter)
-{
+int lua_api_combine_level(lua_State *interpreter) {
     int level;
     const char *str;
 
-    if (2 != lua_gettop(interpreter))
-    {
+    if (2 != lua_gettop(interpreter)) {
         arity_mismatch("combine_level");
         return LUA_FAILURE;
     }
@@ -112,8 +101,7 @@ int lua_api_combine_level(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-void register_lua_output_api(lua_State *interpreter)
-{
+void register_lua_output_api(lua_State *interpreter) {
     lua_newtable(interpreter);
 
     ADD_KV_PAIR(interpreter, "crap", MSGLEVEL_CRAP);
@@ -147,10 +135,8 @@ void register_lua_output_api(lua_State *interpreter)
     lua_setglobal(interpreter, "msglevel");
 }
 
-void lua_api_output_init()
-{
+void lua_api_output_init() {
 }
 
-void lua_api_output_deinit()
-{
+void lua_api_output_deinit() {
 }

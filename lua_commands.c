@@ -23,16 +23,14 @@
 #include <lua_loader.h>
 #include <lua_core.h>
 
-static void lua_cmd_default(const char *data, SERVER_REC *server, void *item)
-{
+static void lua_cmd_default(const char *data, SERVER_REC *server, void *item) {
     if (! *data)
         data = "list";
 
     command_runsub("lua", data, server, item);
 }
 
-static void lua_cmd_load(const char *data)
-{
+static void lua_cmd_load(const char *data) {
     void *free_arg;
     const char *script;
 
@@ -47,8 +45,7 @@ static void lua_cmd_load(const char *data)
     cmd_params_free(free_arg);
 }
 
-static void lua_cmd_unload(const char *data)
-{
+static void lua_cmd_unload(const char *data) {
     void *free_arg;
     const char *script;
 
@@ -63,26 +60,22 @@ static void lua_cmd_unload(const char *data)
     cmd_params_free(free_arg);
 }
 
-static void print_lua_script(gpointer key, gpointer interpreter, gpointer user_data)
-{
+static void print_lua_script(gpointer key, gpointer interpreter, gpointer user_data) {
     printtext(NULL, NULL, MSGLEVEL_CLIENTCRAP, "%s", key);
 }
 
-static void lua_cmd_list(const char *data)
-{
+static void lua_cmd_list(const char *data) {
     g_hash_table_foreach(get_currently_loaded_scripts(), print_lua_script, NULL);
 }
 
-void lua_commands_init()
-{
+void lua_commands_init() {
     command_bind("lua", NULL, (SIGNAL_FUNC)lua_cmd_default);
     command_bind("lua load", NULL, (SIGNAL_FUNC)lua_cmd_load);
     command_bind("lua unload", NULL, (SIGNAL_FUNC)lua_cmd_unload);
     command_bind("lua list", NULL, (SIGNAL_FUNC)lua_cmd_list);
 }
 
-void lua_commands_deinit()
-{
+void lua_commands_deinit() {
     command_unbind("lua", (SIGNAL_FUNC)lua_cmd_default);
     command_unbind("lua load", (SIGNAL_FUNC)lua_cmd_load);
     command_unbind("lua unload", (SIGNAL_FUNC)lua_cmd_unload);

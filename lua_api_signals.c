@@ -21,10 +21,8 @@
 #include <lua_api_signals.h>
 #include <lua_irssi.h>
 
-int lua_api_signal_stop(lua_State *interpreter)
-{
-    if (0 != lua_gettop(interpreter))
-    {
+int lua_api_signal_stop(lua_State *interpreter) {
+    if (0 != lua_gettop(interpreter)) {
         arity_mismatch("signal_stop");
         return LUA_FAILURE;
     }
@@ -34,12 +32,10 @@ int lua_api_signal_stop(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-int lua_api_signal_stop_by_name(lua_State *interpreter)
-{
+int lua_api_signal_stop_by_name(lua_State *interpreter) {
     const char *signal_name;
 
-    if (1 != lua_gettop(interpreter))
-    {
+    if (1 != lua_gettop(interpreter)) {
         arity_mismatch("signal_stop_by_name");
         return LUA_FAILURE;
     }
@@ -51,10 +47,8 @@ int lua_api_signal_stop_by_name(lua_State *interpreter)
     return LUA_SUCCESS;
 }
 
-void lua_api_signals_init()
-{
+void lua_api_signals_init() {
 }
 
-void lua_api_signals_deinit()
-{
+void lua_api_signals_deinit() {
 }

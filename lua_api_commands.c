@@ -20,10 +20,8 @@
 
 #include <lua_api_commands.h>
 
-void lua_api_commands_init()
-{
+void lua_api_commands_init() {
 }
 
-void lua_api_commands_deinit()
-{
+void lua_api_commands_deinit() {
 }
